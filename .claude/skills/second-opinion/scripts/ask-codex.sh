@@ -4,8 +4,8 @@
 # Usage: bash ask-codex.sh [--model MODEL] [--timeout SECS] "prompt"
 #
 # Options:
-#   --model MODEL    Codex model to use (default: gpt-5.4)
-#   --timeout SECS   Max seconds to wait for response (default: 120)
+#   --model MODEL    Codex model to use (default: gpt-6-sol)
+#   --timeout SECS   Max seconds to wait for response (default: 1200)
 #
 # Examples:
 #   bash ask-codex.sh "Review this error handling approach"
@@ -13,7 +13,7 @@
 
 set -euo pipefail
 
-MODEL="gpt-5.4"
+MODEL="gpt-6-sol"
 TIMEOUT=1200
 PROMPT=""
 
@@ -66,12 +66,14 @@ if command -v timeout &>/dev/null; then
   timeout "${TIMEOUT}s" codex exec \
     --sandbox read-only \
     --model "$MODEL" \
+    --config 'model_reasoning_effort="medium"' \
     -o "$OUTFILE" \
     "$PROMPT" 2>/dev/null || EXIT_CODE=$?
 else
   codex exec \
     --sandbox read-only \
     --model "$MODEL" \
+    --config 'model_reasoning_effort="medium"' \
     -o "$OUTFILE" \
     "$PROMPT" 2>/dev/null &
   CODEX_PID=$!

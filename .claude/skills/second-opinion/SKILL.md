@@ -74,8 +74,10 @@ bash .claude/skills/second-opinion/scripts/ask-codex.sh "the neutral prompt here
 ```
 
 Optional flags:
-- `--model MODEL` — override model (default: `gpt-5.4`)
+- `--model MODEL` — override model (default: `gpt-6-sol`)
 - `--timeout SECS` — max wait time (default: 1200, i.e. 20 minutes)
+
+Codex uses medium reasoning effort for every invocation.
 
 ### Step 5: Present the comparison
 
